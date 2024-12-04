@@ -3,12 +3,13 @@ import random
 from PyQt6 import uic
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from UI import Ui_MainWindow
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.setMaximumSize(self.size())
         self.setMinimumSize(self.size())
         self.do_paint = False
@@ -24,7 +25,7 @@ class MyWidget(QMainWindow):
 
     def draw_flag(self, qp):
         rand_D = random.randrange(self.size().width())
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randrange(256), random.randrange(256), random.randrange(256)))
         qp.drawEllipse(0, 0, rand_D, rand_D)
 
     def paint(self):
